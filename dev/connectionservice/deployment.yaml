@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connectionservice
+  namespace: backend-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: connectionservice
+  template:
+    metadata:
+      labels:
+        app: connectionservice
+    spec:
+      containers:
+        - name: connectionservice
+          image: your-dockerhub-username/connectionservice:latest
+          ports:
+            - containerPort: 8080
