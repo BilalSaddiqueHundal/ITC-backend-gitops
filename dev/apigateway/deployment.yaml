@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apigateway
-  namespace: backend-dev
+  labels:
+    app: apigateway
 spec:
   replicas: 1
   selector:
@@ -15,6 +16,10 @@ spec:
     spec:
       containers:
         - name: apigateway
-          image: your-dockerhub-username/apigateway:latest
+          image: docker.io/YOUR_DOCKER_USERNAME/apigateway:1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod

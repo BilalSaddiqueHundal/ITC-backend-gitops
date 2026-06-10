@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: connectionservice
-  namespace: backend-dev
+  labels:
+    app: connectionservice
 spec:
   replicas: 1
   selector:
@@ -15,6 +16,22 @@ spec:
     spec:
       containers:
         - name: connectionservice
-          image: your-dockerhub-username/connectionservice:latest
+          image: docker.io/YOUR_DOCKER_USERNAME/connectionservice:1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 20

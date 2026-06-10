@@ -1,17 +1,12 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: route.openshift.io/v1
+kind: Route
 metadata:
   name: apigateway-route
-  namespace: backend-dev
 spec:
-  rules:
-    - host: api.dev.local
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: apigateway
-                port:
-                  number: 80
+  to:
+    kind: Service
+    name: apigateway
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
