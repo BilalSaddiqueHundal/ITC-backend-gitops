@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: connectionservice-config
-  namespace: backend-dev
-data:
-  SPRING_PROFILES_ACTIVE: dev
