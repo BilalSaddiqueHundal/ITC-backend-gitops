@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: connectionservice
-          image: docker.io/YOUR_DOCKER_USERNAME/connectionservice:1
+          image: docker.io/bilalsaddique/connectionservice:1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
